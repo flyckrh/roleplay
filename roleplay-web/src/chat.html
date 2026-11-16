@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh-Hans"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f3f4ed">
+<title>对话之间</title><link rel="stylesheet" href="/ui.css"><script type="module" src="/chat.js"></script>
+</head><body class="chat-page">
+<header class="masthead"><div class="masthead-inner"><div class="wordmark"><span class="brand-mark" aria-hidden="true"></span>对话之间</div><p>角色情境体验</p></div></header>
+<main class="shell">
+  <aside class="intro">
+    <p class="eyebrow">BETWEEN US</p>
+    <h1>在一段对话里<span>。</span></h1>
+    <p>进入一个虚构情境，读一读角色的消息。对话开放时，你可以回复，也可以随时结束。</p>
+    <div class="intro-foot"><span></span> 虚构角色 · 情境模拟</div>
+  </aside>
+  <section class="chat-card" aria-labelledby="character">
+    <header class="chat-head">
+      <div class="avatar" id="avatar" aria-hidden="true"><span>···</span></div>
+      <div><h2 id="character">情境对话</h2><p id="status">正在载入</p></div>
+      <button class="subtle" id="end" type="button" hidden>结束对话</button>
+    </header>
+    <div class="thread" id="thread" aria-live="polite"></div>
+    <p id="error" class="error chat-error" role="alert"></p>
+    <form id="compose" class="compose" hidden>
+      <label class="sr-only" for="message">回复内容</label>
+      <textarea id="message" maxlength="500" rows="2" placeholder="写下你的回复…"></textarea>
+      <button class="button" type="submit">发送 <span aria-hidden="true">↗</span></button>
+    </form>
+    <footer id="chat-foot" class="chat-foot"></footer>
+  </section>
+</main>
+<footer class="page-foot"><span>对话之间</span><span>请勿在消息中填写真实姓名或联系方式。</span></footer>
+</body></html>

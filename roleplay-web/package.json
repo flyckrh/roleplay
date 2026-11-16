@@ -1,0 +1,1 @@
+{"name":"roleplay-web","private":true,"type":"module","scripts":{"build":"node build.mjs","start":"node --env-file-if-exists=.env server.mjs"},"engines":{"node":">=24"}}

@@ -1,0 +1,46 @@
+services:
+  app:
+    build: .
+    container_name: roleplay-app
+    restart: unless-stopped
+    environment:
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?set ADMIN_PASSWORD in .env}
+      PUBLIC_URL: ${PUBLIC_URL:?set PUBLIC_URL in .env}
+      HOST: 0.0.0.0
+      PORT: "4177"
+      DATA_DIR: /data
+    volumes:
+      - roleplay-data:/data
+    expose:
+      - "4177"
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:4177/').then(r=>process.exit(r.status===200?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+
+  caddy:
+    image: caddy:2-alpine
+    container_name: roleplay-caddy
+    restart: unless-stopped
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      DOMAIN: ${DOMAIN:?set DOMAIN in .env}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+
+volumes:
+  roleplay-data:
+    name: roleplay-data
+  caddy-data:
+    name: roleplay-caddy-data
+  caddy-config:
+    name: roleplay-caddy-config

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-Hans"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>配置角色 · 对话之间</title><link rel="stylesheet" href="/ui.css"><script type="module" src="/research.js"></script>
+</head><body>
+<header class="masthead"><div class="masthead-inner"><div class="wordmark"><span class="brand-mark" aria-hidden="true"></span>对话之间</div><a class="subtle" href="/" target="_blank" rel="noopener">打开对话页 ↗</a></div></header>
+<main class="workbench">
+  <header class="workbench-head"><p class="eyebrow">角色与提示词</p><h1>配置对话角色</h1><p>导入角色卡，补充情境和提示词。保存后，新对话会使用此版本。</p></header>
+  <form id="api-settings" class="editor-card">
+    <h2>模型 API 接口</h2>
+    <label for="api-url">完整接口地址</label>
+    <input id="api-url" type="url" required placeholder="https://你的服务商/v1/chat/completions" maxlength="2000">
+    <label for="api-model">模型名称</label>
+    <input id="api-model" required placeholder="填写服务商提供的模型 ID" maxlength="200">
+    <label for="api-key">API Key</label>
+    <input id="api-key" type="password" autocomplete="new-password" placeholder="首次填写，之后留空可保留原密钥" maxlength="8000">
+    <p class="hint">兼容 Chat Completions 的接口。密钥加密存储在服务器。连接测试会调用模型一次。</p>
+    <div class="publish-bar">
+      <p id="provider-message" role="status">正在读取接口配置…</p>
+      <div><button class="subtle" id="test-api" type="button">测试已保存接口</button><button class="button" id="save-api" type="submit" disabled>保存 API 配置</button></div>
+    </div>
+  </form>
+  <br>
+  <form id="settings">
+    <div class="edit-grid">
+      <section class="editor-card">
+        <h2>角色卡与人物图</h2>
+        <label for="card">导入 SillyTavern 角色卡</label>
+        <input id="card" type="file" accept=".json,.png,application/json,image/png">
+        <p class="hint">支持 JSON 和内嵌角色卡的 PNG。也可以直接填写下面的字段。</p>
+        <label for="portrait">人物图</label>
+        <div class="portrait-controls">
+          <div class="avatar portrait" id="portrait-preview" aria-hidden="true"><span>···</span></div>
+          <div><input id="portrait" type="file" accept="image/png,image/jpeg,image/webp"><button class="subtle" type="button" id="clear-portrait">清除人物图</button></div>
+        </div>
+        <label for="name">角色名称 <span>必填</span></label><input id="name" maxlength="60" required>
+        <label for="description">人物设定</label><textarea id="description" rows="4" maxlength="8000"></textarea>
+        <label for="personality">性格与语言风格</label><textarea id="personality" rows="3" maxlength="4000"></textarea>
+      </section>
+      <section class="editor-card">
+        <h2>对话与提示词</h2>
+        <label for="scenario">当前情境</label><textarea id="scenario" rows="3" maxlength="6000"></textarea>
+        <label for="greeting">开场白 <span>必填</span></label><textarea id="greeting" rows="3" maxlength="4000" required></textarea>
+        <label for="instructions">补充提示词</label><textarea id="instructions" rows="4" maxlength="5000"></textarea>
+        <details><summary>对话示例与历史后指令</summary>
+          <label for="examples">对话示例</label><textarea id="examples" rows="4" maxlength="6000"></textarea>
+          <label for="afterHistory">历史后指令</label><textarea id="afterHistory" rows="3" maxlength="3000"></textarea>
+        </details>
+      </section>
+    </div>
+    <div class="publish-bar"><div><p id="config-status" role="status">正在读取配置…</p><p id="api-status" class="hint"></p></div><button class="button" id="publish" type="submit" disabled>保存角色 <span aria-hidden="true">↗</span></button></div>
+  </form>
+</main>
+</body></html>
